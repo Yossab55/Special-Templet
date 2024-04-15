@@ -1,0 +1,206 @@
+/* start basic things */
+:root {
+  --main-color: #360e93;
+  --main-background-color: #f0f3fc;
+}
+body {
+  font-family: "Ubuntu", sans-serif;
+}
+.container {
+  padding: 0 15px;
+  margin: 0 auto;
+}
+/* small */
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+/* meduim */
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+/* large */
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+a {
+  text-decoration: none;
+  display: block;
+  width: fit-content;
+}
+ul {
+  list-style: none;
+  margin: 0;
+}
+/* end basic things */
+
+/* Start landing page  */
+.landing {
+  position: relative;
+  background-color: var(--main-background-color);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: -100;
+}
+.landing .special1 {
+  width: 600px;
+  aspect-ratio: 400/200;
+  position: absolute;
+  top: -70px;
+  left: -200px;
+  z-index: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.landing .cover1 {
+  background-image: url("../svg/landing1.svg");
+}
+.landing .special2 {
+  width: 4000px;
+  aspect-ratio: 4/2;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  z-index: -1;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.landing .cover2 {
+  background-image: url("../svg/landing2.svg");
+}
+.landing .container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 10px 10px 10px #ddd;
+  padding: 30px;
+  position: relative;
+}
+.landing .container::before {
+  content: "";
+  background-color: #a6e0ec;
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  right: -41px;
+  top: -100px;
+  z-index: -100;
+}
+.landing header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+.landing header h2 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: normal;
+}
+.landing header i.hidden {
+  display: none;
+  cursor: pointer;
+  font-size: 35px;
+}
+.landing header ul {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+.landing header ul li {
+  margin-right: 10px;
+  padding: 0 5px;
+  z-index: 1003;
+  cursor: pointer;
+}
+.landing header ul li a {
+  color: #c8c3c3;
+  font-size: 20px;
+  position: relative;
+  
+}
+.landing .content {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.landing .content .text {
+  margin-bottom: 70px;
+}
+.landing .content .text h2 {
+  font-size: 40px;
+  color: var(--main-color);
+}
+.landing .content .text p {
+  margin: 20px 0 30px;
+  color: #9a8f8f;
+  line-height: 1.6;
+}
+.landing .content .text button {
+  border: none;
+  padding: 10px 20px;
+  background-color: var(--main-color);
+  color: white;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+  position: relative;
+  /* z-index: 2000; */
+}
+.landing .content img {
+  width: 400px;
+  position: relative;
+}
+.landing .content .first-back {
+  width: 400px;
+  aspect-ratio: 4/4;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  z-index: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.landing .content .second-back {
+  width: 534px;
+  aspect-ratio: 4/4;
+  position: absolute;
+  bottom: -187px;
+  right: 10px;
+  z-index: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform-style: preserve-3d;
+  transform: rotateX(71deg);
+}
+.landing .content .cover3 {
+  background-image: url("../svg/backgroundimg.svg");
+}
+@media (max-width: 768px) {
+  .landing .container::before {
+    display: none;
+  }
+  .landing header i.hidden {
+    display: block;
+  }
+  .landing header ul {
+    display: none;
+  }
+  .landing .content .text {
+    text-align: center;
+  }
+  .landing img {
+    display: none;
+  }
+}
+/* end landing page  */
