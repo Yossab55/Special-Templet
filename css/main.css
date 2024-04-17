@@ -2,9 +2,11 @@
 :root {
   --main-color: #360e93;
   --main-background-color: #f0f3fc;
+  --main-transition: 0.4s;
 }
 body {
   font-family: "Ubuntu", sans-serif;
+  position: relative;
 }
 .container {
   padding: 0 15px;
@@ -38,7 +40,54 @@ ul {
   margin: 0;
 }
 /* end basic things */
-
+/* start js things */
+.box-get-name {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background-color: white;
+  border-radius: 10px;
+  top: 50%;
+  left: 50%;
+  width: 70vi;
+  height: 70vh;
+  transform: translate(-50%, -50%);
+  z-index: 1004;
+}
+.overlay {
+  position: absolute;
+  width: 100vi;
+  height: 100vh;
+  background-color: #00000070;
+  z-index: 1002;
+}
+.box-get-name h2 {
+  margin: 0 0 10px;
+  font-size: 50px;
+}
+.box-get-name input.get-name {
+  width: 70%;
+  border: 2px solid var(--main-color);
+  padding: 10px;
+  border-radius: 40px;
+  margin-bottom: 20px;
+}
+.box-get-name input.get-name:focus {
+  outline: none;
+}
+.box-get-name button {
+  padding: 10px 20px;
+  font-size: 30px;
+  color: white;
+  font-weight: bold;
+  background-color: var(--main-color);
+  border: none;
+  border-radius: 30px ;
+  cursor:pointer;
+}
+/* end js things */
 /* Start landing page  */
 .landing {
   position: relative;
@@ -47,7 +96,7 @@ ul {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: -100;
+  z-index: 1000;
 }
 .landing .special1 {
   width: 600px;
@@ -118,16 +167,37 @@ ul {
   margin-right: 10px;
 }
 .landing header ul li {
-  margin-right: 10px;
-  padding: 0 5px;
+  margin-right: 3px;
+  padding: 10px;
   z-index: 1003;
   cursor: pointer;
+  transition: var(--main-transition);
+  position: relative;
+  border-radius: 4px;
+}
+.landing header ul li::before {
+  content: " ";
+  position: absolute;
+  width: 0%;
+  height: 5px;
+  background-color: var(--main-color);
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: var(--main-transition);
+}
+.landing header ul li:hover {
+  background-color: var(--main-background-color);
+  transform: rotate(4deg);
+  font-size: 22px;
+}
+.landing header ul li:hover::before {
+  width: 100%;
 }
 .landing header ul li a {
-  color: #c8c3c3;
+  color: var(--main-color);
   font-size: 20px;
   position: relative;
-  
 }
 .landing .content {
   display: flex;
@@ -162,29 +232,23 @@ ul {
   position: relative;
 }
 .landing .content .first-back {
-  width: 400px;
-  aspect-ratio: 4/4;
-  position: absolute;
   bottom: 0px;
   right: 0px;
-  z-index: 0;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 .landing .content .second-back {
-  width: 534px;
-  aspect-ratio: 4/4;
-  position: absolute;
-  bottom: -187px;
-  right: 10px;
-  z-index: 0;
-  background-repeat: no-repeat;
-  background-size: cover;
+  bottom: -148px;
+  right: 55px;
   transform-style: preserve-3d;
   transform: rotateX(71deg);
 }
 .landing .content .cover3 {
   background-image: url("../svg/backgroundimg.svg");
+  width: 400px;
+  aspect-ratio: 4/4;
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 0;
 }
 @media (max-width: 768px) {
   .landing .container::before {
@@ -199,7 +263,8 @@ ul {
   .landing .content .text {
     text-align: center;
   }
-  .landing img {
+  .landing img,
+  .landing .content .cover3 {
     display: none;
   }
 }
