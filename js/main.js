@@ -1,37 +1,84 @@
 let getName = document.getElementById("get-name");
-let getNameClick = false
-
+// get name section
 getName.onclick = function () {
-  if (getNameClick) {
-    getName.removeEventListener("click", function() {});
-    return;
-  }
+  let takeNameOverlay = document.createElement("div"),
+    takeNameDiv = document.createElement("div"),
+    takeNameH2 = document.createElement("h2"),
+    takeNameInput = document.createElement("input"),
+    takeNameButton = document.createElement("button");
+
   getName.style.cursor = "default";
-  getNameClick = true
-  let takeNameOverlay = document.createElement("div")
   takeNameOverlay.classList = "overlay";
+  takeNameOverlay.addEventListener("click", function () {
+    getName.innerText = takeNameInput.value || "Unknown";
+    takeNameOverlay.remove();
+    takeNameDiv.remove();
+  });
   document.body.prepend(takeNameOverlay);
 
-  let takeNameDiv = document.createElement("div");
   takeNameDiv.classList = "box-get-name";
 
-  let takeNameH2 = document.createElement("h2");
   takeNameH2.append("Enter Your Name");
   takeNameDiv.append(takeNameH2);
 
-  let takeNameInput = document.createElement("input");
   takeNameInput.classList = "get-name";
   takeNameInput.setAttribute("type", "text");
   takeNameInput.setAttribute("placeholder", "Unknown");
   takeNameDiv.append(takeNameInput);
-  
-  let takeNameButton = document.createElement("button");
-  takeNameButton.append("Send")
-  takeNameButton.onclick = function () {
+
+  takeNameButton.append("Send");
+  takeNameButton.addEventListener("click", function () {
     getName.innerText = takeNameInput.value || "Unknown";
+
+    getName.removeEventListener("click", function () {});
     takeNameOverlay.remove();
-    takeNameButton.parentElement.remove();
-  }
+    takeNameDiv.remove();
+  });
   takeNameDiv.append(takeNameButton);
   takeNameOverlay.after(takeNameDiv);
+};
+
+let threeDots = document.getElementById("menu-list");
+threeDots.remove();
+if (document.documentElement.clientWidth <= 767) {
+  let menuUL = document.getElementById("normal");
+  let menuPhoneOpen = false
+  menuUL.remove();
+  document.querySelector(".landing .container header h2").after(threeDots);
+  threeDots.addEventListener("click", function makeList() {
+    menuPhoneOpen = true;
+    let menuPhone = document.createElement("ul");
+    let menuText = ["Home", "About us", "Work", "info"];
+    menuPhone.style.cssText = `
+    display: flex;
+    flex-direction: column;
+    padding: 10px 10px 10px 5px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 1004;
+    background: #f0f3fc;
+    border-radius: 25px;
+    margin-bottom: 5px;
+    box-shadow: rgba(22, 21, 21, 0.46) -5px 5px 10px;
+      `;
+    for (let i = 0; i < 4; i++) {
+      let li = document.createElement("li");
+      let link = document.createElement("a");
+      link.append(`${menuText[i]}`);
+      link.setAttribute("href", `#${menuText[i]}`);
+      li.append(link);
+      menuPhone.append(li);
+    }
+
+    threeDots.after(menuPhone);
+    if(menuPhoneOpen) {
+      document.body.addEventListener("click", function () {
+        menuPhoneOpen= false ;
+        console.log("aaaaa")
+        // menuPhone.remove();
+        this.removeEventListener("click", function () {console.log("aaa")})
+      })
+    }
+  });
 }
