@@ -30,7 +30,7 @@ getName.onclick = function () {
   takeNameButton.addEventListener("click", function () {
     getName.innerText = takeNameInput.value || "Unknown";
 
-    getName.removeEventListener("click", function () {});
+    getName.removeEventListener("click", function () { });
     takeNameOverlay.remove();
     takeNameDiv.remove();
   });
@@ -46,39 +46,40 @@ if (document.documentElement.clientWidth <= 767) {
   menuUL.remove();
   document.querySelector(".landing .container header h2").after(threeDots);
   threeDots.addEventListener("click", function makeList() {
-    menuPhoneOpen = true;
-    let menuPhone = document.createElement("ul");
-    let menuText = ["Home", "About us", "Work", "info"];
-    menuPhone.style.cssText = `
-    display: flex;
-    flex-direction: column;
-    padding: 10px 10px 10px 5px;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    z-index: 1004;
-    background: #f0f3fc;
-    border-radius: 25px;
-    margin-bottom: 5px;
-    box-shadow: rgba(22, 21, 21, 0.46) -5px 5px 10px;
+    if (!menuPhoneOpen) {
+      menuPhoneOpen = true;
+      let menuPhone = document.createElement("ul");
+      let menuText = ["Home", "About us", "Work", "info"];
+      menuPhone.setAttribute('id', 'menu_continer')
+      menuPhone.style.cssText = `
+      display: flex;
+      flex-direction: column;
+      padding: 10px 10px 10px 5px;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      z-index: 1004;
+      background: #f0f3fc;
+      border-radius: 25px;
+      margin-bottom: 5px;
+      box-shadow: rgba(22, 21, 21, 0.46) -5px 5px 10px;
       `;
-    for (let i = 0; i < 4; i++) {
-      let li = document.createElement("li");
-      let link = document.createElement("a");
-      link.append(`${menuText[i]}`);
-      link.setAttribute("href", `#${menuText[i]}`);
-      li.append(link);
-      menuPhone.append(li);
-    }
-
-    threeDots.after(menuPhone);
-    if(menuPhoneOpen) {
-      document.body.addEventListener("click", function () {
-        menuPhoneOpen= false ;
-        console.log("aaaaa")
-        // menuPhone.remove();
-        this.removeEventListener("click", function () {console.log("aaa")})
-      })
+      for (let i = 0; i < 4; i++) {
+        let li = document.createElement("li");
+        let link = document.createElement("a");
+        link.append(`${menuText[i]}`);
+        link.setAttribute("href", `#${menuText[i]}`);
+        li.append(link);
+        menuPhone.append(li);
+      } 
+      threeDots.after(menuPhone);
     }
   });
+  document.body.addEventListener("click", e => {
+    let menu = document.getElementById("menu_continer");
+    if (e.target !== menu && e.target !== threeDots && !menu.contains(e.target)) {
+      menu.remove();
+      menuPhoneOpen = false;
+    }
+  })
 }
